@@ -1,0 +1,53 @@
+#+TITLE: Clojure JDBC Tester
+* motivation
+I wanna test whether jdbc connection is correct or not.
+
+If you want to learn Google Cloud SQL (with PostgreSQL), This repository will help you.
+
+* The tutorial of Google Cloud SQL and Cloud SQL Proxy [0/0]
+
+** Initialize Cloud SQL
+1. at first, *create the cloud sql instance* from https://console.cloud.google.com/sql/instances
+2. after select database which is in the left pane, *create the database*
+
+   #+ATTR_ORG: :width 500
+   [[./doc/img/sql_create_db.png]]
+3. create user *PostgreSQL account* to access your db.
+** Setup local envs
+ 1. install cloud sql proxy into your local pc. and also, clone this repo.
+
+     ref: https://cloud.google.com/sql/docs/mysql/connect-external-app#proxy
+
+ 2. run proxy
+
+    #+BEGIN_SRC shell
+./cloud_sql_proxy -instances=<INSTANCE_CONNECTION_NAME>=tcp:5432
+# 2021/04/09 16:37:46 Rlimits for file descriptors set to {Current = 8500, Max = 524288}
+# ...
+    #+END_SRC
+
+    you can access 127.0.0.1:5432 to manage database as the user you created.
+
+ 3. run this repo's app
+
+    #+BEGIN_SRC shell
+export DATABASE_TYPE=postgresql
+export DATABASE_HOST=127.0.0.1
+export DATABASE_PORT=5432
+export DATABASE_NAME=<your database name>
+export DATABASE_USER=<your created user>
+export DATABASE_USER_PASSWORD=<your created user's password>
+lein run
+    #+END_SRC
+
+
+    if you set correct settings, you can get below message
+
+    #+begin_example
+$ lein run
+OpenJDK 64-Bit Server VM warning: Options -Xverify:none and -noverify were deprecated in JDK 13 and will likely be removed in a future release.
+
+check your settings ...
+#object[org.postgresql.jdbc.PgConnection 0x1fdca564 org.postgresql.jdbc.PgConnection@1fdca564]
+Your settings is correct. have a fun to use Google Cloud SQL!
+    #+end_example
