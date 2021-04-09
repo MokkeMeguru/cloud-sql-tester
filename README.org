@@ -2,10 +2,12 @@
 * motivation
 I wanna test whether jdbc connection is correct or not.
 
-If you want to learn Google Cloud SQL (with PostgreSQL), This repository will help you.
-
-* The tutorial of Google Cloud SQL and Cloud SQL Proxy [0/0]
-
+If you want to learn Google Cloud SQL (with PostgreSQL), This repository will help your
+* required
+- gcloud
+- shell (macos / linux)
+- maven (to use Cloud-SQL-JDBC-Socket-Factory)
+* The tutorial of Google Cloud SQL and Cloud SQL Proxy
 ** Initialize Cloud SQL
 1. at first, *create the cloud sql instance* from https://console.cloud.google.com/sql/instances
 2. after select database which is in the left pane, *create the database*
@@ -30,7 +32,9 @@ If you want to learn Google Cloud SQL (with PostgreSQL), This repository will he
 
  3. run this repo's app
 
+
     #+BEGIN_SRC shell
+export CONNECTION_METHOD=proxy
 export DATABASE_TYPE=postgresql
 export DATABASE_HOST=127.0.0.1
 export DATABASE_PORT=5432
@@ -51,3 +55,9 @@ check your settings ...
 #object[org.postgresql.jdbc.PgConnection 0x1fdca564 org.postgresql.jdbc.PgConnection@1fdca564]
 Your settings is correct. have a fun to use Google Cloud SQL!
     #+end_example
+*  The tutorial of Google Cloud SQL and Cloud-SQL-JDBC-Socket-Factory
+    cloud-sql-jdbc-socket-factory is GOOGLE ORIGNAL JDBC CONNECTOR :)
+
+    This docs will broken by their developer team tomorrow lol.
+
+    NOTICE: I throw out this project because it is too unstable and doubt.
